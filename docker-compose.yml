@@ -103,11 +103,21 @@ services:
     command: ['--default-authentication-plugin=mysql_native_password']
     networks:
       - elastic
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+        tag: mysql
 
   redis:
     image: redis:alpine
     networks:
       - elastic
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+        tag: redis
 
 networks:
   elastic:
