@@ -1,16 +1,14 @@
-version: '3.7'
-
+version: "3"
 services:
-  fluent-bit:
-    image: fluent/fluent-bit:1.5
+  fluentd:
+    build: ./fluentd
     volumes:
-      - ./fluent-bit/conf:/fluent-bit/etc
+      - ./fluentd/conf:/fluentd/etc
     links:
       - "elasticsearch"
     ports:
-      - 24224:24224
-      - 5140:5140/udp
-      - 2020:2020
+      - "24224:24224"
+      - "24224:24224/udp"
     logging:
         driver: "json-file"
         options:
@@ -43,7 +41,7 @@ services:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
     networks:
       - elastic
-
+  
   nginx:
     image: nginx:alpine
     ports:
@@ -54,11 +52,6 @@ services:
       - voting
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "nginx"
 
   voting:
     build: .
@@ -87,11 +80,6 @@ services:
       - redis
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "voting"
 
   mysql:
     image: mysql:latest
@@ -100,27 +88,16 @@ services:
       - MYSQL_DATABASE=voting
       - MYSQL_USER=voting
       - MYSQL_PASSWORD=voting
-      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password  # Добавляем эту строку
+      - MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password
     command: ['--default-authentication-plugin=mysql_native_password']
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "mysql"
 
   redis:
     image: redis:alpine
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "redis"
 
 networks:
   elastic:
-    driver: bridge
 
