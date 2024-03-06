@@ -52,6 +52,12 @@ services:
       - voting
     networks:
       - elastic
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+        tag: nginx
+
 
   voting:
     build: .
@@ -80,6 +86,11 @@ services:
       - redis
     networks:
       - elastic
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+        tag: voting
 
   mysql:
     image: mysql:latest
@@ -100,4 +111,3 @@ services:
 
 networks:
   elastic:
-
