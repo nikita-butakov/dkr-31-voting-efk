@@ -1,6 +1,6 @@
-version: '3.7'
-
+version: '3'
 services:
+
   fluent-bit:
     image: fluent/fluent-bit:1.5
     volumes:
@@ -54,11 +54,6 @@ services:
       - voting
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "nginx"
 
   voting:
     build: .
@@ -87,11 +82,6 @@ services:
       - redis
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "voting"
 
   mysql:
     image: mysql:latest
@@ -104,21 +94,11 @@ services:
     command: ['--default-authentication-plugin=mysql_native_password']
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "mysql"
 
   redis:
     image: redis:alpine
     networks:
       - elastic
-    logging:
-      driver: "fluentd"
-      options:
-        fluentd-address: "fluent-bit:24224"
-        tag: "redis"
 
 networks:
   elastic:
