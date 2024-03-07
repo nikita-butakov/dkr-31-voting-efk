@@ -1,3 +1,8 @@
+Need to change core setting to run elastic:
+```shell script
+sudo sysctl -w vm.max_map_count=262144
+```
+
 ## Platform
 * `php >= 7.2` (served best with `FPM`)
 * `MySQL` database backend
