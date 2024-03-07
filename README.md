@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
 Need to change core setting to run elastic:
 ```shell script
 sudo sysctl -w vm.max_map_count=262144
 ```
-
->>>>>>> b4d1934c722af0fb0c087c7f471ac0a400d02b4a
 ## Platform
 * `php >= 7.2` (served best with `FPM`)
 * `MySQL` database backend
