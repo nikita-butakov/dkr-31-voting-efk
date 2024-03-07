@@ -1,4 +1,3 @@
-=======
 Need to change core setting to run elastic:
 ```shell script
 sudo sysctl -w vm.max_map_count=262144
