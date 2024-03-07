@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Platform
 * `php >= 7.2` (served best with `FPM`)
 * `MySQL` database backend
@@ -43,3 +44,7 @@ $ php artisan polls:collect:status
 # Running unit tests
 $ php vendor/bin/phpunit -c phpunit.xml 
 ```
+=======
+# dkr-31-voting-efk
+Rebrainme DKR 31
+>>>>>>> a46a6ca617c780c15b80f47284e3a05e9ae0ae3d
